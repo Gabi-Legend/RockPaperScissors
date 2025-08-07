@@ -41,19 +41,27 @@ export default function Home() {
   return (
     <>
       <div>
-        <button onClick={handleStart}>Start</button>
+        <button onClick={handleStart} className={styles.button}>
+          Start
+        </button>
       </div>
-      <div>
-        <div>
-          <select value={image} onChange={(e) => setImage(e.target.value)}>
+
+      <div className={styles.options}>
+        <div className={styles.player}>
+          <select
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            className={styles.select}
+          >
             <option value="rock">Rock</option>
             <option value="paper">Paper</option>
             <option value="scissors">Scissors</option>
           </select>
           <Image src={imageMap[image]} alt={image} className={styles.image} />
         </div>
-        <div>
-          <p>Bot selected:</p>
+
+        <div className={styles.player}>
+          <p className={styles.p}>Bot selected:</p>
           {botSelect && (
             <Image
               src={imageMap[botSelect]}
@@ -63,7 +71,8 @@ export default function Home() {
           )}
         </div>
       </div>
-      <h1>Score : {score}</h1>
+
+      <h1 className={styles.h1}>Score: {score}</h1>
     </>
   );
 }
