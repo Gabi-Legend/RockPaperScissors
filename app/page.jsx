@@ -9,6 +9,7 @@ import scissors from "@/app/assets/scissors.jpg";
 export default function Home() {
   const [image, setImage] = useState("rock");
   const [botSelect, handleBotSelect] = useState("");
+  const [score, setScore] = useState(0);
 
   const imageMap = {
     rock,
@@ -18,18 +19,29 @@ export default function Home() {
 
   const options = ["rock", "paper", "scissors"];
 
+  const handleStart = () => {
+    const randomChoice = options[Math.floor(Math.random() * options.length)];
+    handleBotSelect(randomChoice);
+
+    if (randomChoice === image) {
+      alert("Draw");
+    } else if (
+      (randomChoice === "rock" && image === "scissors") ||
+      (randomChoice === "paper" && image === "rock") ||
+      (randomChoice === "scissors" && image === "paper")
+    ) {
+      alert("You lost!");
+      setScore(score - 1);
+    } else {
+      alert("You won!");
+      setScore(score + 1);
+    }
+  };
+
   return (
     <>
       <div>
-        <button
-          onClick={() => {
-            const randomChoice =
-              options[Math.floor(Math.random() * options.length)];
-            handleBotSelect(randomChoice);
-          }}
-        >
-          Start
-        </button>
+        <button onClick={handleStart}>Start</button>
       </div>
       <div>
         <div>
@@ -51,6 +63,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <h1>Score : {score}</h1>
     </>
   );
 }
